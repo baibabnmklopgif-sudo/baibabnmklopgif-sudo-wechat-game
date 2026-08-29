@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>微信小游戏‑点我变彩</title>
+<style>
+  body,html{margin:0;height:100%;display:flex;justify-content:center;align-items:center;background:#111;}
+  #box{width:120px;height:120px;background:#ff5722;cursor:pointer;transition:transform .2s;}
+</style>
+</head>
+<body>
+<div id="box"></div>
+<script>
+  const box=document.getElementById('box');
+  function randColor(){return '#'+Math.floor(Math.random()*0xffffff).toString(16).padStart(6,'0');}
+  function randPos(){
+    const vw=window.innerWidth-120, vh=window.innerHeight-120;
+    return {x:Math.random()*vw|0, y:Math.random()*vh|0};
+  }
+  function move(){
+    const {x,y}=randPos();
+    box.style.transform=`translate(${x}px,${y}px)`;
+    box.style.background=randColor();
+  }
+  move();
+  box.addEventListener('click',move);
+  setInterval(move,3000);
+</script>
+</body>
+</html>
